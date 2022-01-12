@@ -39,7 +39,7 @@ pipeline {
                 sh 'docker run --rm helloworld:latest'
             }
         }
-        stage('Docker Tag') {
+        stage('Docker Tag test') {
             steps {
                 sh 'docker tag hello dockerdaas/helloworld:latest'
                 sh 'docker tag hello dockerdaas/helloworld:$BUILD_NUMBER'

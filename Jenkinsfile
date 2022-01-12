@@ -31,25 +31,25 @@ pipeline {
         }*/
         stage('Docker Build') {
             steps {
-                sh 'docker build -t hello:latest .'
+                sh 'docker build -t helloworld:latest .'
             }
         }
         stage('Test Docker image'){
             steps {
-                sh 'docker run --rm hello:latest'
+                sh 'docker run --rm helloworld:latest'
             }
         }
         stage('Docker Tag') {
             steps {
-                sh 'docker tag hello dockerdaas/hello:latest'
-                sh 'docker tag hello dockerdaas/hello:$BUILD_NUMBER'
+                sh 'docker tag hello dockerdaas/helloworld:latest'
+                sh 'docker tag hello dockerdaas/helloworld:$BUILD_NUMBER'
             }
         }
         stage('Publish image to Docker Hub') {
            steps {
                withDockerRegistry([credentialsId: 'dockerhub', url: "https://index.docker.io/v1/"]) {
-               sh  'docker push dockerdaas/hello:latest'
-               sh  'docker push dockerdaas/hello:$BUILD_NUMBER'
+               sh  'docker push dockerdaas/helloworld:latest'
+               sh  'docker push dockerdaas/helloworld:$BUILD_NUMBER'
               }
            }
         }

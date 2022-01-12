@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('SonarQube analysis') {
+        /*stage('SonarQube analysis') {
            environment {
               scannerHome = tool 'SonarQubeScanner'
              } 
@@ -18,7 +18,7 @@ pipeline {
               }
             }
           }
-        /*stage('Build') {
+        stage('Build') {
             steps {
                 sh '/usr/bin/make clean'
                 sh '/usr/bin/make' 

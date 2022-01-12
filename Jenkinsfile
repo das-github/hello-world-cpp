@@ -11,14 +11,14 @@ pipeline {
                 }
             }
         } 
-        /*stage("Quality Gate") {
+        stage("Quality Gate") {
             steps {
-              timeout(time: 1, unit: 'HOURS') {
+              timeout(activity: true, time: 2) {
                 waitForQualityGate abortPipeline: true
               }
             }
           }
-        stage('Build') {
+        /*stage('Build') {
             steps {
                 sh '/usr/bin/make clean'
                 sh '/usr/bin/make' 

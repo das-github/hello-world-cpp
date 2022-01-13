@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('Build & Scan') {
             steps {
-                sh "/usr/bin/make clean"
-                sh "/usr/bin/make" 
+                sh "make" 
                 sh "cppcheck --xml --xml-version=2 --enable=all ./ 2> cppcheck-report.xml"
             }
         } 

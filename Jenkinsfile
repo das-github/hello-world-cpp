@@ -1,27 +1,28 @@
 pipeline {
     agent any
     stages {
-        /*stage('SonarQube analysis') {
+        stage('Build & Scan') {
+            steps {
+                sh "/usr/bin/make clean"
+                sh "/usr/bin/make" 
+                sh "cppcheck --xml --xml-version=2 --enable=all ./ 2> cppcheck-report.xml"
+            }
+        } 
+        stage('SonarQube analysis') {
            environment {
-              scannerHome = tool 'SonarQubeScanner'
+              scannerHome = tool 'SonarScanner'
              } 
            steps {
-             withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube') {
-                sh "${scannerHome}/bin/sonar-scanner -X"
+             withSonarQubeEnv('SonarQube') {
+                sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         } 
-        stage("Quality Gate") {
+        /*stage("Quality Gate") {
             steps {
-              timeout(activity: true, time: 2) {
+             timeout(activity: true, time: 2) {
                 waitForQualityGate abortPipeline: false
               }
-            }
-          }
-        stage('Build') {
-            steps {
-                sh '/usr/bin/make clean'
-                sh '/usr/bin/make' 
             }
         }
         stage('Test'){

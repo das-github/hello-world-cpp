@@ -39,6 +39,11 @@ pipeline {
                 sh 'docker run --rm helloworld:latest'
             }
         }
+        stage('Scanning Image') {
+            steps {
+               echo 'sysdig scan of Docker image'
+            }
+        }        
         stage('Docker Tag test') {
             steps {
                 sh 'docker tag hello dockerdaas/helloworld:latest'
